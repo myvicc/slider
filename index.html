@@ -3,8 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .container {
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .slider {
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        .block {
+            display: block;
+            object-fit: cover;
+            width: 500%;
+            height: 500%;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .hidden {
+            display: none;
+        }
+        #btnNext,
+        #btnPrev {
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+
+        }
+    </style
 </head>
 <body>
+<div class="container">
+    <button type="button"  id="btnPrev">prev</button>
+    <div class="slider" id="slider">
+        <img src="images/babypay.jpg" alt="">
+        <img src="images/n21.jpg" alt="">
+        <img src="images/pb22.jpg" alt="">
+        <img src="images/powerbankB.jpg" alt="">
+    </div>
+    <button type="button" id="btnNext">next</button>
 
+</div>
+<script src="index.js"></script>
 </body>
 </html>
