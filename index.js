@@ -1,0 +1,53 @@
+const slider = document.querySelector("#slider");
+const img = document.querySelectorAll('img');
+const btnPrev = document.querySelector("#btnPrev");
+const btnNext = document.querySelector("#btnNext");
+let nextSlideIndex;
+let currentSlideIndex;
+updateButtonState();
+
+img.forEach((slide, index) => {
+    if (index !== 0) slide.classList.add("hidden");
+    slide.dataset.index = index;
+
+    img[0].setAttribute("data-active", "");
+});
+
+
+btnNext.onclick = () => {
+    showNextSlide("next");
+    updateButtonState();
+}
+
+btnPrev.onclick = () => {
+    updateButtonState();
+    showNextSlide("prev");
+}
+
+function showNextSlide(direction) {
+    const currentSlide = slider.querySelector("[data-active]");
+    currentSlideIndex = +currentSlide.dataset.index;
+    currentSlide.classList.add("hidden");
+    currentSlide.removeAttribute("data-active");
+    if (direction === "next") {
+        nextSlideIndex = currentSlideIndex + 1;
+    } else if (direction === "prev") {
+        nextSlideIndex = currentSlideIndex === 0 ? 0 : currentSlideIndex  - 1;
+    }
+
+    const nextSlide = slider.querySelector(`[data-index="${nextSlideIndex}"]`);
+    nextSlide.classList.remove("hidden");
+    nextSlide.setAttribute("data-active", "");
+
+}
+
+function updateButtonState () {
+    if (nextSlideIndex === 0) {
+        btnPrev.disabled = true;
+    } else if (nextSlideIndex === img.length - 1) {
+        btnNext.disabled = true;
+        return;
+    }
+    btnPrev.disabled = false;
+    btnNext.disabled = false;
+}
