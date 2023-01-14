@@ -3,20 +3,23 @@ const img = document.querySelectorAll('img');
 const btnPrev = document.querySelector("#btnPrev");
 const btnNext = document.querySelector("#btnNext");
 let nextSlideIndex;
-let currentSlideIndex;
-updateButtonState();
+let currentSlideIndex = 0;
+
+console.log(img[0].dataset.index);
 
 img.forEach((slide, index) => {
     if (index !== 0) slide.classList.add("hidden");
-    slide.dataset.index = index;
+    slide.dataset.index = index.toString();
 
     img[0].setAttribute("data-active", "");
+
 });
 
 
 btnNext.onclick = () => {
     showNextSlide("next");
     updateButtonState();
+
 }
 
 btnPrev.onclick = () => {
@@ -42,9 +45,11 @@ function showNextSlide(direction) {
 }
 
 function updateButtonState () {
-    if (nextSlideIndex === 0) {
+    if (currentSlideIndex === 0) {
         btnPrev.disabled = true;
-    } else if (nextSlideIndex === img.length - 1) {
+        return;
+    }
+    if (nextSlideIndex === img.length - 1) {
         btnNext.disabled = true;
         return;
     }
